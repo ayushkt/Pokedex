@@ -11,7 +11,7 @@ import UIKit
 class PokeCell: UICollectionViewCell {
     
     @IBOutlet weak var thumbImg: UIImageView!
-    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var numLbl: UILabel!
     
     var pokemon: Pokemon!
     
@@ -27,7 +27,7 @@ class PokeCell: UICollectionViewCell {
     func configureCell(pokemon: Pokemon) {
         self.pokemon = pokemon
         
-        nameLbl.text = self.pokemon.name.capitalizedString
+        numLbl.text = String(self.pokemon.pokedexId)
         thumbImg.image =  UIImage(named: "\(self.pokemon.pokedexId)")
         
     }
