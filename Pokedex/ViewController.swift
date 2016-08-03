@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 
+var inSearchMode = false
+
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     @IBOutlet weak var collection: UICollectionView!
@@ -17,7 +19,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var pokemon = [Pokemon]()
     var filteredPokemon = [Pokemon]()
     var musicPlayer: AVAudioPlayer!
-    var inSearchMode = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

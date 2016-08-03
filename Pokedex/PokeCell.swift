@@ -27,8 +27,12 @@ class PokeCell: UICollectionViewCell {
     func configureCell(pokemon: Pokemon) {
         self.pokemon = pokemon
         
-        numLbl.text = String(self.pokemon.pokedexId)
-        thumbImg.image =  UIImage(named: "\(self.pokemon.pokedexId)")
-        
+        if inSearchMode {
+            numLbl.text = String(self.pokemon.name.capitalizedString)
+            thumbImg.image =  UIImage(named: "\(self.pokemon.pokedexId)")
+        } else {
+            numLbl.text = String(self.pokemon.pokedexId)
+            thumbImg.image =  UIImage(named: "\(self.pokemon.pokedexId)")
+        }
     }
 }
