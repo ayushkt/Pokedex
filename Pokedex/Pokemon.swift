@@ -118,7 +118,7 @@ class Pokemon {
     }
     
     init(name: String, pokedexId: Int) {
-        self._name = name
+        self._name = name.capitalizedString
         self._pokedexId = pokedexId
         
         _pokemonUrl = "\(URL_BASE)\(URL_POKEMON)\(self._pokedexId)/"
@@ -132,13 +132,29 @@ class Pokemon {
             
             if let dict = result.value as? Dictionary<String, AnyObject> {
                 
-                if let weight = dict["weight"] as? String {
-                    self._weight = weight
+                if self._pokedexId <= 649 {
+                    if let weight = dict["weight"] as? String {
+                        self._weight = weight
+                    }
+                    
+                    if let height = dict["height"] as? String {
+                        self._height = height
+                    }
+                } else if self._pokedexId >= 650 {
+                    if let height = HEIGHTS[self._name] {
+                        self._height = height
+                    } else {
+                        self._height = "Not Found"
+                    }
+                    if let weight = WEIGHTS[self._name] {
+                        self._weight = weight
+                    } else {
+                        self._weight = "Not Found"
+                    }
                 }
                 
-                if let height = dict["height"] as? String {
-                    self._height = height
-                }
+                
+
                 
                 if let attack = dict["attack"] as? Int {
                     self._attack = "\(attack)"
@@ -212,7 +228,7 @@ class Pokemon {
                                 }
                                 
                                 // Some evolutions are wrong due to "baby pokemon"
-                                if (self._nextEvoTxt == "Clefairy" && self._name != "Cleffa") || (self._nextEvoTxt == "Pikachu" && self._name != "Pichu") || (self._nextEvoTxt == "Jigglypuff" && self._name != "Igglybuff") || (self._nextEvoTxt == "Togetic" && self._name != "Togepi") || (self._nextEvoTxt == "Jynx" && self._name != "Smoochum") || (self._nextEvoTxt == "Magmar" && self._name != "Magby") || (self._nextEvoTxt == "Electabuzz" && self._name != "Elekid") || (self._nextEvoTxt == "Marill" && self._name != "Azurill") || (self._nextEvoTxt == "Wobbuffet" && self._name != "Wynaut") || (self._nextEvoTxt == "Rosella" && self._name != "Budew") || (self._nextEvoTxt == "Chimecho" && self._name != "Chingling") || (self._nextEvoTxt == "Sudowoodo" && self._name != "Bonsly") || (self._nextEvoTxt == "Mr. Mime" && self._name != "Mime Jr.") || (self._nextEvoTxt == "Chansey" && self._name != "Happiny") || (self._nextEvoTxt == "Snorlax" && self._name != "Munchlax") || (self._nextEvoTxt == "Lucario" && self._name != "Riolu") || (self._nextEvoTxt == "Mantine" && self._name != "Mantyke") {
+                                if (self._nextEvoTxt == "Clefairy" && self._name != "Cleffa") || (self._nextEvoTxt == "Pikachu" && self._name != "Pichu") || (self._nextEvoTxt == "Jigglypuff" && self._name != "Igglybuff") || (self._nextEvoTxt == "Togetic" && self._name != "Togepi") || (self._nextEvoTxt == "Jynx" && self._name != "Smoochum") || (self._nextEvoTxt == "Magmar" && self._name != "Magby") || (self._nextEvoTxt == "Electabuzz" && self._name != "Elekid") || (self._nextEvoTxt == "Marill" && self._name != "Azurill") || (self._nextEvoTxt == "Wobbuffet" && self._name != "Wynaut") || (self._nextEvoTxt == "Rosella" && self._name != "Budew") || (self._nextEvoTxt == "Chimecho" && self._name != "Chingling") || (self._nextEvoTxt == "Sudowoodo" && self._name != "Bonsly") || (self._nextEvoTxt == "Mr. Mime" && self._name != "Mime Jr.") || (self._nextEvoTxt == "Chansey" && self._name != "Happiny") || (self._nextEvoTxt == "Snorlax" && self._name != "Munchlax") || (self._nextEvoTxt == "Lucario" && self._name != "Riolu") || (self._nextEvoTxt == "Mantine" && self._name != "Mantyke") || (self._nextEvoTxt == "Glaceon" && self._name == "Leafeon") || (self._nextEvoTxt == "Gliscor" && self._name == "Glaceon") {
                                     self._nextEvoTxt = ""
                                     self._nextEvoLvl = ""
                                     self._nextEvoId = ""
@@ -221,8 +237,16 @@ class Pokemon {
                                 if self._name == "Tyrogue" {
                                     self._nextEvoTxt = "Multiple"
                                     self._nextEvoLvl = "20"
-                                    self._nextEvoId = "107"
+                                    self._nextEvoId = ""
                                 }
+                                
+                                if self._name == "Eevee" {
+                                    self._nextEvoTxt = "Multiple"
+                                    self._nextEvoLvl = "Multiple"
+                                    self._nextEvoId = ""
+                                }
+                                
+                                
                                 
                             }
                             

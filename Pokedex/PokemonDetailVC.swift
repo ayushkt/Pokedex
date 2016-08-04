@@ -41,13 +41,29 @@ class PokemonDetailVC: UIViewController {
 
     func updateUI() {
         
+        var height = pokemon.height
+        if (Double(height) != nil) {
+            height = String(Double(height)! / 10) + " meters"
+        } else {
+            height = "Not Found"
+        }
+        heightLbl.text = height
+        var weight = pokemon.weight
+        if (Double(weight) != nil) {
+            weight = String(Double(weight)! / 10) + " kg"
+        } else {
+            weight = "Not Found"
+        }
+        weightLbl.text = weight
+        
         descriptionLbl.text = pokemon.description
         typeLbl.text = pokemon.type
         defenseLbl.text = pokemon.defense
-        heightLbl.text = pokemon.height
         pokedexId.text = "\(pokemon.pokedexId)"
-        weightLbl.text = pokemon.weight
         attackLbl.text = pokemon.attack
+        
+        
+        
         
         if pokemon.nextEvoId == "" {
             evoLbl.text = "No Evolutions"
@@ -60,6 +76,7 @@ class PokemonDetailVC: UIViewController {
             if pokemon.nextEvoLvl != "" {
                 str += " - LVL \(pokemon.nextEvoLvl)"
             }
+            evoLbl.text = str
         }
         
         
